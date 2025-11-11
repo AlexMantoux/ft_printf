@@ -1,9 +1,6 @@
 #SETTINGS#
-SRC_DIR=.
 
-SRC=$(SRC_DIR)/ft_atoi.c \
-$(SRC_DIR)/ft_isalpha.c \
-$(SRC_DIR)/ft_isdigit.
+SRC=ft_printf.c
 
 #SRC = $(LIBC)#
 CC = gcc
