@@ -6,17 +6,37 @@
 /*   By: amantoux <amantoux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 11:14:55 by amantoux          #+#    #+#             */
-/*   Updated: 2025/11/11 12:23:09 by amantoux         ###   ########.fr       */
+/*   Updated: 2025/11/11 12:40:49 by amantoux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib.h"
 #include <stdarg.h>
 
-void	ft_putchar(char c)
+void	format_c(char c)
 {
 	write(1, &c, 1);
 }
+
+void	format_s(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		write(1,str[i],1);
+}
+
+void	format_p(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		write(1,str[i],1);
+}
+
+void 	
 
 void	ft_format(char c, ...)
 {
