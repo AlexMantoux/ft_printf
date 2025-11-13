@@ -6,7 +6,7 @@
 /*   By: amantoux <amantoux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 09:58:34 by amantoux          #+#    #+#             */
-/*   Updated: 2025/11/13 08:34:51 by amantoux         ###   ########.fr       */
+/*   Updated: 2025/11/13 11:50:25 by amantoux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@ int	ft_strlen(char *s)
 
 int	format_s(char *str)
 {
+	if (!str)
+	{
+		write(1, "(null)", 6);
+		return (6);
+	}
 	write(1, str, ft_strlen(str));
 	return (ft_strlen(str));
 }

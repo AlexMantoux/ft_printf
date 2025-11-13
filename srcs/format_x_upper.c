@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   format_x_upper.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amantoux <amantoux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/12 09:57:09 by amantoux          #+#    #+#             */
-/*   Updated: 2025/11/13 08:46:15 by amantoux         ###   ########.fr       */
+/*   Created: 2025/11/12 11:35:40 by amantoux          #+#    #+#             */
+/*   Updated: 2025/11/13 09:54:25 by amantoux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include <ft_printf.h>
 
-# include <unistd.h>
-# include <stdarg.h>
+int	format_x_upper(unsigned long n)
+{
+	int		count;
+	char	*base;
 
-int	format_d(int n);
-int	format_u(unsigned int n);
-int	format_x(unsigned long n);
-int	format_x_upper(unsigned long n);
-int	format_p(void *p);
-int	format_c(char c);
-int	format_s(char *str);
-int	ft_printf(const char *c, ...);
-
-
-#endif
+	base = "0123456789ABCDEF";
+	count = 0;
+	count++;
+	if (n >= 16)
+		count += format_x_upper(n / 16);
+	format_c(base[n % 16]);
+	return (count);
+}

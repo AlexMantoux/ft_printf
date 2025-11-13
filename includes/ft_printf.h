@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   format_p.c                                         :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amantoux <amantoux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/12 11:36:22 by amantoux          #+#    #+#             */
-/*   Updated: 2025/11/13 08:30:49 by amantoux         ###   ########.fr       */
+/*   Created: 2025/11/12 09:57:09 by amantoux          #+#    #+#             */
+/*   Updated: 2025/11/13 09:11:50 by amantoux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_printf.h>
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-int	format_p(void *p)
-{
-	unsigned long	ad;
-	int				count;
+# include <unistd.h>
+# include <stdarg.h>
 
-	count = -1;
-	ad = (unsigned long)p;
-	if (ad == 0)
-		return (format_s("(nil)"), 4);
-	else
-	{
-		count += format_s("0x");
-		count += format_x(ad);
-	}
-	return (count);
-}
+int	format_d(int n);
+int	format_u(unsigned int n);
+int	format_x(unsigned long n);
+int	format_x_upper(unsigned long n);
+int	format_p(void *p);
+int	format_c(char c);
+int	format_s(char *str);
+int	handle_format(const char *c, int i, va_list args);
+int	ft_printf(const char *c, ...);
+
+#endif

@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   format_u.c                                         :+:      :+:    :+:   */
+/*   format_p.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amantoux <amantoux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/12 10:00:55 by amantoux          #+#    #+#             */
-/*   Updated: 2025/11/13 08:31:39 by amantoux         ###   ########.fr       */
+/*   Created: 2025/11/12 11:36:22 by amantoux          #+#    #+#             */
+/*   Updated: 2025/11/13 10:25:42 by amantoux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include <ft_printf.h>
 
-int	format_u(unsigned int n)
+int	format_p(void *p)
 {
-	int	count;
+	unsigned long	ad;
+	int				count;
 
 	count = 0;
-	if (n < 10)
+	ad = (unsigned long)p;
+	if (ad == 0)
+		return (format_s("(nil)"), 5);
+	else
 	{
-		format_c(n + '0');
-		return (count);
+		count += format_s("0x");
+		count += format_x(ad);
 	}
-	count += format_d(n / 10);
-	count += format_c((n % 10) + '0');
 	return (count);
 }

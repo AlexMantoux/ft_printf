@@ -1,15 +1,20 @@
-SRC=format_d.c\
-	format_p.c\
-	format_x.c\
-	format_x_upper.c\
-	format_u.c\
-	format_s.c\
-	ft_printf.c\
+SRC_DIR=srcs
 
-#SRC = $(LIBC)#
+SRC=$(SRC_DIR)/format_d.c\
+	$(SRC_DIR)/format_c.c\
+	$(SRC_DIR)/format_p.c\
+	$(SRC_DIR)/format_x.c\
+	$(SRC_DIR)/format_x_upper.c\
+	$(SRC_DIR)/format_u.c\
+	$(SRC_DIR)/format_s.c\
+	$(SRC_DIR)/handle_format.c\
+	$(SRC_DIR)/ft_printf.c\
+
+INC_DIR = includes
+
 CC = cc
 
-CFLAGS = -Werror -Wextra -Wall -I ./
+CFLAGS = -Werror -Wextra -Wall
 
 NAME = libftprintf.a
 
@@ -24,7 +29,7 @@ $(NAME): $(OBJ)
 	ar rcs $@ $^
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@ -I ./
+	$(CC) $(CFLAGS) -I $(INC_DIR) -c $< -o $@
 
 clean:
 	rm -rf $(OBJ)
