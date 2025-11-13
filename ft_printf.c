@@ -6,101 +6,15 @@
 /*   By: amantoux <amantoux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 11:14:55 by amantoux          #+#    #+#             */
-/*   Updated: 2025/11/11 19:37:28 by amantoux         ###   ########.fr       */
+/*   Updated: 2025/11/13 08:45:18 by amantoux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdarg.h>
-
-int	format_c(char c)
-{
-	write(1, &c, 1);
-	return (1);
-}
-
-int	format_s(char *str)
-{
-	int	count;
-	int	i;
-
-	count = 0;
-	i = 0;
-	while (str[i])
-	{
-		write(1,&str[i++],1);
-		count++;
-	}
-	return (count);
-}
-
-void	format_d(int n)
-{
-    if (n == -2147483648)
-    {
-            format_s("-2147483648");
-            return ;
-    }
-    if (n < 0)
-    {
-            format_c('-');
-            n *= -1;
-    }
-    if (n < 10)
-    {
-            format_c(n + '0');
-            return ;
-    }
-    format_d(n / 10);
-    format_c((n % 10) + '0');
-}
-
-void	format_u(unsigned int n)
-{
-    if (n < 10)
-    {
-            format_c(n + '0');
-            return ;
-    }
-    format_d(n / 10);
-    format_c((n % 10) + '0');
-}
-
-void	format_x(unsigned long n)
-{
-	char *base = "0123456789abcdef";
-
-	if (n >= 16)
-		format_x(n / 16);
-	format_c(base[n % 16]);
-}
-
-void	format_X(unsigned long n)
-{
-	char *base = "0123456789ABCDEF";
-
-	if (n >= 16)
-		format_x(n / 16);
-	format_c(base[n % 16]);
-}
-
-void	format_p(void *p)
-{
-	unsigned long ad;
-
-	ad = (unsigned long)p;
-	if (ad == 0)
-		format_s("(nil)");
-	else
-	{
-		format_s("0x");
-		format_x(ad);
-	}
-}
+#include "ft_printf.h"
 
 int	ft_printf(const char *c, ...)
 {
-	va_list args;
+	va_list	args;
 	int		i;
 	int		count;
 
@@ -119,15 +33,15 @@ int	ft_printf(const char *c, ...)
 			if (c[i] == 's')
 				count += format_s(va_arg(args, char *));
 			if (c[i] == 'd' || c[i] == 'i')
-				format_d(va_arg(args, int));
+				count += format_d(va_arg(args, int));
 			if (c[i] == 'u')
-				format_u(va_arg(args, unsigned int));
+				count += format_u(va_arg(args, unsigned int));
 			if (c[i] == 'x')
-				format_x(va_arg(args, unsigned int));
+				count += format_x(va_arg(args, unsigned int));
 			if (c[i] == 'X')
-				format_X(va_arg(args, unsigned int));
+				count += format_x_upper(va_arg(args, unsigned int));
 			if (c[i] == 'p')
-				format_p(va_arg(args, void *));
+				count += format_p(va_arg(args, void *));
 		}
 		else
 		{
@@ -140,22 +54,43 @@ int	ft_printf(const char *c, ...)
 	return (count);
 }
 
-#include <stdio.h>
+// #include <stdio.h>
 
-int	main(void)
-{
-	int x = 42;
-	char *str = "Alex";
+// int main(void)
+// {
+// 	int x = 42;
+// 	char *str = "Alex";
 
-	// ft_printf("Adresse de x : %p\n", &x);
-	// ft_printf("Adresse de str : %p\n", str);
-	// ft_printf("Pointeur NULL : %p\n", NULL);
-	
-	// printf("Adresse de x : %p\n", &x);
-	// printf("Adresse de str : %p\n", str);
-	// printf("Pointeur NULL : %p\n", NULL);
+// 	ft_printf("Adresse de x : %p\n", &x);
+// 	ft_printf("Adresse de str : %p\n", str);
+// 	ft_printf("Pointeur NULL : %p\n", NULL);
 
-	printf("%d\n", ft_printf("alex %s", "alex"));
-	printf("%d", printf("alex %s", "alex"));
-	return (0);
-}
+// 	printf("Adresse de x : %p\n", &x);
+// 	printf("Adresse de str : %p\n", str);
+// 	printf("Pointeur NULL : %p\n\n", NULL);
+
+// 	printf("%d\n", ft_printf("alex %s %%", "alex"));
+// 	printf("%d\n\n", printf("alex %s %%", "alex"));
+
+// 	printf("%d\n", ft_printf("%d\n", 123));
+// 	printf("%d\n", printf("%d\n", 123));
+
+// 	printf("%d\n", ft_printf("%u\n", (unsigned int)-1));
+// 	printf("%d\n", printf("%u\n", (unsigned int)-1));
+
+// 	printf("%d\n", ft_printf("%x\n", (unsigned int)954954));
+// 	printf("%d\n", printf("%x\n", (unsigned int)954954));
+
+// 	printf("%d\n", ft_printf("%X\n", (unsigned int)954954));
+// 	printf("%d\n", printf("%X\n", (unsigned int)954954));
+
+
+// 	printf("%d\n", ft_printf("MAdresse de x : %p\n", &x));
+// 	printf("%d\n", ft_printf("MAdresse de str : %p\n", str));
+// 	printf("%d\n\n", ft_printf("MPointeur NULL : %p\n", NULL));
+
+// 	printf("%d\n", printf("Adresse de x : %p\n", &x));
+// 	printf("%d\n", printf("Adresse de str : %p\n", str));
+// 	printf("%d\n", printf("Pointeur NULL : %p\n", NULL));
+// 	return (0);
+// }

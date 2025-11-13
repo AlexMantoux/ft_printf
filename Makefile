@@ -1,9 +1,13 @@
-#SETTINGS#
-
-SRC=ft_printf.c
+SRC=format_d.c\
+	format_p.c\
+	format_x.c\
+	format_x_upper.c\
+	format_u.c\
+	format_s.c\
+	ft_printf.c\
 
 #SRC = $(LIBC)#
-CC = gcc
+CC = cc
 
 CFLAGS = -Werror -Wextra -Wall -I ./
 
@@ -20,7 +24,7 @@ $(NAME): $(OBJ)
 	ar rcs $@ $^
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@ -I ./
 
 clean:
 	rm -rf $(OBJ)
