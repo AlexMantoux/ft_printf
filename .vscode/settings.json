@@ -1,7 +1,0 @@
-{
-	"files.associations": {
-		"lib.h": "c",
-		"ft_printf.h": "c",
-		"stdarg.h": "c"
-	}
-}
